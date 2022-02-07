@@ -35,9 +35,5 @@ def init_DB(DB_name: str, headers: List[str]) -> str:
     
     return str(database_path) # print the file address
 
-if __name__ == "__main__":
-    headers = ['a', 'b', 'c']
-    db_name = "testdb"
-    init_DB(db_name, headers)
 
 
