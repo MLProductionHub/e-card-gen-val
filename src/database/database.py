@@ -1,28 +1,20 @@
 from genericpath import exists
 from pathlib import Path
-from typing import List
+from typing import List, Union
 import os
 import csv
 
-def init_DB(DB_name: str, headers: List[str]) -> str:
+def init_DB(database_path: Union[str, Path], headers: List[str]) -> str:
     """Creates a new csv file as the database with the given headers.
 
     Args:
-        DB_name (str): name of the database
+        database_path (Union[str, Path]): path of the database
         headers (List[str]): a list of the headers for csv file
 
     Returns:
         str: the absolute address of the database file
     """
-    root_path = os.getcwd() # getting the current working directory as the root directory
-    data_path = os.path.join(root_path, "data") # create the data folder path
-
-    if os.path.exists(data_path): # checking if the data directory exists
-        database_path = os.path.join(data_path, DB_name+".csv") # database path
-    else:
-        os.mkdir(data_path) # creating the path if it doesn't exist
-        database_path = os.path.join(data_path, DB_name+".csv") # database path
-
+    database_path = os.path.expanduser(database_path) # Creating the absolute path
     if os.path.exists(database_path): # checking for existing databases
         print("The database file already exists.")
     else:
@@ -32,8 +24,7 @@ def init_DB(DB_name: str, headers: List[str]) -> str:
             writer.writerow(headers) # write the header line
     
     return str(database_path) # print the file address
-
-    
+     
     
 
 
