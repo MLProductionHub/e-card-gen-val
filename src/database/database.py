@@ -1,4 +1,3 @@
-from genericpath import exists
 from pathlib import Path
 from typing import Dict, List, Union
 import os
@@ -33,19 +32,19 @@ def write_to_database(database: Union[str, Path], info: Dict[str, object]):
         info (Dict[str, object]): The dictionary contatining the key and values. (Values should be iterables)
     """
     database = os.path.expanduser(database) # create the absolut path to database
-    if os.path.exists(database):
-        # the case that database already exists
-        args = list(info.values()) # values to be stored
-        try: 
-            for values in args:
-                assert len(values) == len(args[0]) # checking that all lists have the same length
-            args_size = len(args[0])
-        
-        except AssertionError:
-            print("The values are not the same size.")
-            args_size = min([len(values) for values in args]) # in case of different length the minimum length is considered
+    args = list(info.values()) # values to be stored
+
+    try: 
+        for values in args:
+            assert len(values) == len(args[0]) # checking that all lists have the same length
+        args_size = len(args[0])
+    
+    except AssertionError:
+        print("The values are not the same size. The inputs will be deprecated to the minimum compatible size.")
+        args_size = min([len(values) for values in args]) # in case of different length the minimum length is considered
 
 
+    if os.path.exists(database): # the case that database already exists
         with open(database, "a") as file: # writing in database
             writer = csv.writer(file) 
             for i in range(args_size):
@@ -63,3 +62,13 @@ def write_to_database(database: Union[str, Path], info: Dict[str, object]):
                 for values in args:
                     row.append(values[i])
                 writer.writerow(row)
+
+if __name__ == "__main__":
+    info = dict(
+        ali = [1, 3, 4],
+        hassan = [3, 5, 1, 3]
+    )
+
+    database = "~/Desktop/db.csv"
+
+    write_to_database(database, info)
