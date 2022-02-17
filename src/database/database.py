@@ -4,7 +4,7 @@ from typing import List, Union
 import os
 import csv
 
-def init_DB(database_path: Union[str, Path], headers: List[str]) -> str:
+def init_database(database_path: Union[str, Path], headers: List[str]) -> str:
     """Creates a new csv file as the database with the given headers.
 
     Args:
@@ -24,7 +24,6 @@ def init_DB(database_path: Union[str, Path], headers: List[str]) -> str:
             writer.writerow(headers) # write the header line
     
     return str(database_path) # print the file address
-     
     
 
 
