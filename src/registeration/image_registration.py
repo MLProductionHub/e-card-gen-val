@@ -59,18 +59,3 @@ def get_image_from_url(url: str, dest_path: Union[str, Path])-> str:
     open(dest_path, "wb").write(response.content) # writing the downloaded image to a file
 
     return str(dest_path).split("/")[-1]
-    
-
-
-    
-
-if __name__ == "__main__":
-    img_path = "~/Downloads/20220204_124121.jpg"
-    dest_path = "~/Desktop/mohammad.jpg"
-    image = get_image_from_local(img_path, dest_path)
-    print(image)
-
-    url = "https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png?download"
-    dest_path = "~/Desktop/lena.png"
-    image = get_image_from_url(url, dest_path)
-    print(image)
