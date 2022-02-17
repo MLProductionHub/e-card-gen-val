@@ -1,5 +1,3 @@
-"""initializes a new database for storing the users informations."""
-
 from genericpath import exists
 from pathlib import Path
 from typing import List
@@ -34,3 +32,8 @@ def init_DB(DB_name: str, headers: List[str]) -> str:
             writer.writerow(headers) # write the header line
     
     return str(database_path) # print the file address
+
+    
+    
+
+
