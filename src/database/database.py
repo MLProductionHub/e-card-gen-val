@@ -62,13 +62,3 @@ def write_to_database(database: Union[str, Path], info: Dict[str, object]):
                 for values in args:
                     row.append(values[i])
                 writer.writerow(row)
-
-if __name__ == "__main__":
-    info = dict(
-        ali = [1, 3, 4],
-        hassan = [3, 5, 1, 3]
-    )
-
-    database = "~/Desktop/db.csv"
-
-    write_to_database(database, info)
